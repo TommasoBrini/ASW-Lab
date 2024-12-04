@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plain example</title>
+</head>
+
+<body>
+    <button onclick="incrementCounter()" id="button">
+        You clicked me: 0 times.
+    </button>
+
+    <script>
+        let counter = 0;
+        function incrementCounter() {
+            counter++;
+            const newText = `You clicked me: ${counter} times.`;
+            document.getElementById('button').innerText = newText;
+        }
+    </script>
+</body>
+
+</html>

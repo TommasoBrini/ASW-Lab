@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Some Vue functionalities</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+        }
+        section {
+            margin: auto;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            width: 80%;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            background-color: #ccc;
+            margin: 0;
+            padding: 0.6em 0.8em;
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Vue basic examples</h1>
+<div id="app">
+
+    <section>
+        <h2>Text interpolation</h2>
+        <p>{{ name }}</p>
+    </section>
+
+    <section>
+        <h2>v-for</h2>
+        <ul>
+            <li v-for="product in products"> {{ product }}</li>
+        </ul>
+        <form>
+            <input type="text" v-model="newProduct">
+            <button v-on:click.prevent="insertProduct">Add</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Computed property</h2>
+        <input type="text" v-model="myText"><br>
+        {{ myEnrichedText }}
+    </section>
+
+    <section>
+        <h2>Fetch some data (interpolation)</h2>
+        <button @click="getSomeData">Get Data</button>
+        <p>{{ responseData }}</p>
+    </section>
+</div>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                name: "my app",
+                products: [],
+                newProduct: "",
+                myText: "",
+                responseData: null
+            }
+        },
+        computed: {
+            myEnrichedText() {
+                return "You are currently typing: " + this.myText;
+            }
+        },
+        methods: {
+            loadProducts() {
+                this.products = ['pane', 'pasta', 'olio'];
+            },
+            insertProduct() {
+                this.products.push(this.newProduct);
+                this.newProduct = "";
+            },
+            getSomeData() {
+                fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+                    .then(response => response.json())
+                    .then(response => {
+                        this.responseData = response;
+                    })
+            }
+        },
+        mounted() {
+            this.loadProducts();
+        }
+    });
+    app.mount('#app')
+</script>
+</body>
+
+</html>
