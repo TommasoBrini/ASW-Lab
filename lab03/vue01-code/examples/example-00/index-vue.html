@@ -9,17 +9,17 @@
 </head>
 
 <body>
-    <div id="app">
-        <button @click="counter++">
-            You clicked me: {{ counter }} times.
-        </button>
-    </div>
-
+    <div id="app"></div>
     <script>
         Vue.createApp({
             data() { 
                 return { counter: 0 }
-            }
+            },
+            template: `
+                <button @click="counter++">
+                    You clicked me: {{ counter }} times.
+                </button>
+            `
         }).mount('#app')
     </script>
 </body>
