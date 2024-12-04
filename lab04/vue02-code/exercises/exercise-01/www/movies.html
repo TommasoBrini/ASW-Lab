@@ -11,6 +11,7 @@
         table td img { width: 100px; }
     </style>
     <script src="/header.js"></script>
+    <script src="/add-movie-form.js"></script>
 </head>
 
 <body>
@@ -55,16 +56,16 @@ const defaultImgUrl = "https://user-images.githubusercontent.com/24848110/335193
 
 Vue.createApp({
     components:{
-        "FilmHeader": header
+        "FilmHeader": header,
+        "AddMovieForm": addMovieForm
     },
     template: `
-        <FilmHeader \>
+        <FilmHeader />
+        <AddMovieForm />
         `,
     data() {
         return {
             movies: [],
-            adding: false,
-            newMovie: { }
         }
     },
     methods: {
@@ -92,33 +93,11 @@ Vue.createApp({
                 .then(response => {
                     this.movies.splice(this.movies.findIndex(item => item.id === moviesId), 1);
                 });
-        },
-        showAddMovieForm() {
-            this.adding = true;
-        },
-        hideAddMovieForm() {
-            this.adding = false;
-            this.resetNewMovie();
-        },
-        resetNewMovie() {
-            this.newMovie = {
-                "title": "",
-                "plot": "",
-                "poster": "",
-                "released": new Date().toISOString().slice(0, 10)
-            }
-        },
-        addMovie() {
-            axios.post("/api/movies/", this.newMovie)
-                .then(response => {
-                    this.movies.push(response.data);
-                    this.hideAddMovieForm();
-                });
-        }
+        }, 
     },
     created() {
         this.listMovies();
-        this.resetNewMovie();
+        
     }
 }).mount("#crud-movies-app")
 </script>
