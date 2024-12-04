@@ -10,47 +10,12 @@
     <style>
         table td img { width: 100px; }
     </style>
+    <script src="/header.js"></script>
 </head>
 
 <body>
 <div id="crud-movies-app" class="container-fluid">
-    <header class="jumbotron text-center">
-        <h1 class="display-3">Welcome to the Movie Database</h1>
-        <p class="lead">Manage your favorite movies with ease</p>
-    </header>
-    <div class="row justify-content-center mb-4">
-        <div class="col-auto">
-            <button @click="showAddMovieForm" type="button" class="btn btn-success">
-                <i class="fas fa-plus"></i> Add Movie
-            </button>
-        </div>
-    </div>
-    <div class="row" v-if="adding">
-        <div class="col">
-            <form>
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input v-model="newMovie.title" type="text" class="form-control" id="title" placeholder="Enter title">
-                </div>
-                <div class="form-group">
-                    <label for="plot">Plot</label>
-                    <textarea v-model="newMovie.plot" class="form-control" id="plot">
-                </textarea>
-                </div>
-                <div class="form-group">
-                    <label for="poster">Poster link</label>
-                    <input v-model="newMovie.poster" type="text" class="form-control" id="poster" placeholder="Enter poster link">
-                    <img v-bind:src="newMovie.poster" alt="" />
-                </div>
-                <div class="form-group">
-                    <label for="release">Release date</label>
-                    <input v-model="newMovie.released" type="date" class="form-control" id="release">
-                </div>
-                <button @click.prevent="addMovie" type="submit" class="btn btn-primary">Submit</button>
-                <button @click.prevent="hideAddMovieForm" type="submit" class="btn btn-danger">Cancel</button>
-            </form>
-        </div>
-    </div>
+    
     <div class="row">
         <div class="col">
             <table class="table responsive">
@@ -89,6 +54,12 @@
 const defaultImgUrl = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
 
 Vue.createApp({
+    components:{
+        "FilmHeader": header
+    },
+    template: `
+        <FilmHeader \>
+        `,
     data() {
         return {
             movies: [],
