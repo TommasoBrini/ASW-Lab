@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Component Example</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <inc-counter-button></inc-counter-button>
+    </div>
+
+    <script>
+        const StrongText = {
+            template: '<strong>Strong Text</strong>'
+        };
+
+        const IncreaseCounterButton = {
+            data() { return { counter: 0 } },
+            template: `
+                <button @click="counter++">
+                    <StrongText />
+                    You clicked me: {{ counter }} times.
+                </button>`,
+            components: {
+                'StrongText': StrongText
+            }
+        };
+
+        const app = Vue.createApp({
+            components: {
+                'inc-counter-button': IncreaseCounterButton
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hello World in Vue.js</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style>
+        table td img { width: 100px; }
+    </style>
+</head>
+
+<body>
+<div id="crud-movies-app" class="container-fluid">
+    <header class="jumbotron text-center">
+        <h1 class="display-3">Welcome to the Movie Database</h1>
+        <p class="lead">Manage your favorite movies with ease</p>
+    </header>
+    <div class="row justify-content-center mb-4">
+        <div class="col-auto">
+            <button @click="showAddMovieForm" type="button" class="btn btn-success">
+                <i class="fas fa-plus"></i> Add Movie
+            </button>
+        </div>
+    </div>
+    <div class="row" v-if="adding">
+        <div class="col">
+            <form>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input v-model="newMovie.title" type="text" class="form-control" id="title" placeholder="Enter title">
+                </div>
+                <div class="form-group">
+                    <label for="plot">Plot</label>
+                    <textarea v-model="newMovie.plot" class="form-control" id="plot">
+                </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="poster">Poster link</label>
+                    <input v-model="newMovie.poster" type="text" class="form-control" id="poster" placeholder="Enter poster link">
+                    <img v-bind:src="newMovie.poster" alt="" />
+                </div>
+                <div class="form-group">
+                    <label for="release">Release date</label>
+                    <input v-model="newMovie.released" type="date" class="form-control" id="release">
+                </div>
+                <button @click.prevent="addMovie" type="submit" class="btn btn-primary">Submit</button>
+                <button @click.prevent="hideAddMovieForm" type="submit" class="btn btn-danger">Cancel</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table responsive">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Plot</th>
+                        <th>Poster</th>
+                        <th>Release date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="movie in movies" :key="movie.id">
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.plot }}</td>
+                        <td><img v-if="movie.poster" v-bind:src="movie.poster" alt="" @error="replaceByDefault"></td>
+                        <td>{{ movie.released }}</td>
+                        <td>
+                            <button @click="deleteMovie(movie.id)" type="button" class="btn btnsm">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+// a default image to be used when the poster is not available
+const defaultImgUrl = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
+
+Vue.createApp({
+    data() {
+        return {
+            movies: [],
+            adding: false,
+            newMovie: { }
+        }
+    },
+    methods: {
+        listMovies() {
+            axios
+                .get("http://localhost:3000/api/movies")
+                .then(response => {
+                    this.movies = response.data;
+                    console.log(this.movies);
+                    this.movies.forEach((movie) => {
+                        if (movie.poster != null) {
+                            movie.poster = movie.poster.replace("http://ia.media-imdb.com/", "https://m.media-amazon.com/");
+                        }
+                        else {
+                            movie.poster = defaultImgUrl;
+                        }
+                    });
+                });
+        },
+        replaceByDefault(event) {
+            event.target.src = defaultImgUrl;
+        },
+        deleteMovie(moviesId) {
+            axios.delete("/api/movies/" + moviesId)
+                .then(response => {
+                    this.movies.splice(this.movies.findIndex(item => item.id === moviesId), 1);
+                });
+        },
+        showAddMovieForm() {
+            this.adding = true;
+        },
+        hideAddMovieForm() {
+            this.adding = false;
+            this.resetNewMovie();
+        },
+        resetNewMovie() {
+            this.newMovie = {
+                "title": "",
+                "plot": "",
+                "poster": "",
+                "released": new Date().toISOString().slice(0, 10)
+            }
+        },
+        addMovie() {
+            axios.post("/api/movies/", this.newMovie)
+                .then(response => {
+                    this.movies.push(response.data);
+                    this.hideAddMovieForm();
+                });
+        }
+    },
+    created() {
+        this.listMovies();
+        this.resetNewMovie();
+    }
+}).mount("#crud-movies-app")
+</script>
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>My All in One App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body>
+<div id="app" class="container-fluid">
+    <header class="mb-5">
+        <h1 class="display-4 text-center">My All in One App</h1>
+
+        <nav class="navbar navbar-expand-lg justify-content-center">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="btn mx-2 btn-primary" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn mx-2 btn-secondary" href="#">Calculator</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn mx-2 btn-secondary" href="#">Todo</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn mx-2 btn-secondary" href="#">Crypto</a>
+            </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="row col-md-4 offset-md-4">
+        "My All-in-One App" is a versatile, feature-packed application that combines all essential tools and functions into
+        one unified platform. Designed to streamline daily tasks, it offers everything you need for productivity,
+        entertainment, organization, and more. From calculators and note-taking to reminders and news feeds, My All-in-One
+        App consolidates multiple tools to keep life simple and accessible. Perfectly suited for both work and personal use,
+        this app eliminates the need to switch between different applications, saving time and enhancing convenience.
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Calculator</h3>
+                    <div class="form-group">
+                        <input type="text" id="display" class="form-control text-right" readonly>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group w-100" role="group">
+                            <button class="btn btn-secondary mx-1">1</button>
+                            <button class="btn btn-secondary mx-1">2</button>
+                            <button class="btn btn-secondary mx-1">3</button>
+                            <button class="btn btn-secondary mx-1">+</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group w-100" role="group">
+                            <button class="btn btn-secondary mx-1">4</button>
+                            <button class="btn btn-secondary mx-1">5</button>
+                            <button class="btn btn-secondary mx-1">6</button>
+                            <button class="btn btn-secondary mx-1">-</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group w-100" role="group">
+                            <button class="btn btn-secondary mx-1">7</button>
+                            <button class="btn btn-secondary mx-1">8</button>
+                            <button class="btn btn-secondary mx-1">9</button>
+                            <button class="btn btn-secondary mx-1">*</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group w-100" role="group">
+                            <button class="btn btn-secondary mx-1">0</button>
+                            <button class="btn btn-secondary mx-1">.</button>
+                            <button class="btn btn-secondary mx-1">=</button>
+                            <button class="btn btn-secondary mx-1">/</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-danger btn-block">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Todo List</h3>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Add a new task">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">Add Task</button>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <input type="checkbox">
+                            <span style="text-decoration-line: line-through">An element</span>
+                            <button class="btn btn-danger btn-sm float-right">Remove</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Crypto Prices</h3>
+                    <!-- A spinner to wait for the data to load -->
+                    <div class="text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <strong>Cripto</strong>: xxx price USD
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+const cryptoUrl = "https://api.coinlore.net/api/tickers/";
+Vue.createApp({}).mount('#app')
+</script>
+</body>
+
+</html>

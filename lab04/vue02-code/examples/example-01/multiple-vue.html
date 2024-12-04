@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Component Example</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app1"><h1>Hello World {{ msg }}</h1></div>
+
+    <div id="app2"><h1>Ciao {{ msg }}</h1></div>
+
+    <script>
+        Vue.createApp({
+            data() { return { msg: 'from App 1',} },
+        }).mount('#app1');
+
+        Vue.createApp({
+            data() { return { msg: 'da App 2', } },
+        }).mount('#app2');
+    </script>
+</body>
+
+</html>
