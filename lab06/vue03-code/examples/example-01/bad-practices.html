@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue component communication - bad practices</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        You click the button:
+        <strong-text v-bind:message="count" v-bind:innerProp="anotherProp"></strong-text>
+        <br>
+        <button v-on:click="increment">Click me!</button>
+        <div>Reference prop can be modified, but it's a bad practice: {{ anotherProp.name }}</div>
+    </div>
+
+    <script>
+        const StrongText = Vue.defineComponent({
+            template: `
+                <div>
+                    <strong>{{ message }}</strong><br>
+                    <button v-on:click="tryToModifyPrimitive">Try to modify Primitive</button><br>
+                    <button v-on:click="tryToModifyReference">Try to modify Reference</button>
+                </div>`,
+            props: {
+                message: Number,
+                innerProp: Object
+            },
+            methods: {
+                tryToModifyPrimitive() {
+                    this.message++;
+                },
+                tryToModifyReference() {
+                    this.innerProp.name = 'Hello from Inner Component';
+                }
+            }
+        });
+
+        Vue.createApp({
+            data() {
+                return {
+                    count: 0,
+                    anotherProp: { name: 'Hi' }
+                }
+            },
+            methods: {
+                increment() { this.count++; }
+            },
+            components: { StrongText }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

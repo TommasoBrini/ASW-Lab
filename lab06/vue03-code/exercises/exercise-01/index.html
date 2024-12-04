@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Total clicks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+<div id="app" class="flex flex-col items-center">
+    <h1 class="my-7 text-5xl font-bold text-gray-900">Total clicks</h1>
+    <div class="flex space-x-4">
+        <button id="0" class="my-14 px-4 py-2 bg-blue-500 text-white rounded">
+            Button 1 [x1] (0 click)
+        </button>
+        <button id="1" class="my-14 px-4 py-2 bg-green-500 text-white rounded">
+            Button 2 [x2] (0 click)
+        </button>
+        <button id="2" class="my-14 px-4 py-2 bg-blue-500 text-white rounded">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 inline">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672Zm-7.518-.267A8.25 8.25 0 1 1 20.25 10.5M8.288 14.212A5.25 5.25 0 1 1 17.25 10.5" />
+            </svg> [x3] (0 click)
+        </button>
+    </div>
+    <div class="text-2xl">
+        Total: 0
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="./components/fancy-button.js"></script>
+<script>
+    Vue.createApp({
+        components: { FancyButton },
+        data() {
+            return { }
+        },
+    }).mount('#app')
+</script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue component communication - bind props</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        You click the button: <strong-text v-bind:message="count"></strong-text>
+        <br>
+        <button v-on:click="increment">Click me!</button>
+    </div>
+
+    <script>
+        const StrongText = Vue.defineComponent({
+            template: '<strong>{{ message }}</strong>',
+            props: { message: Number }
+        });
+
+        Vue.createApp({
+            data() {
+                return { count: 0 }
+            },
+            methods: {
+                increment() { this.count++; }
+            },
+            components: { StrongText }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue component communication example</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        You click the button: {{ count }} times.<br>
+        <strong-button v-on:clicked-event="handleClick"></strong-button>
+    </div>
+
+    <script>
+        const StrongButton = Vue.defineComponent({
+            template: `
+            <button v-on:click="clicked">
+                <strong>Click me!</strong>
+            </button>`,
+            methods: {
+                clicked() {
+                    this.$emit('clicked-event');
+                }
+            },
+            // Optional
+            // emits: ['clicked-event']
+        });
+
+        Vue.createApp({
+            data() { return { count: 0 } },
+            components: { StrongButton },
+            methods: {
+                handleClick() { this.count++; }
+            },
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue component communication example</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        Hello
+        <strong-text message="my friend"></strong-text>
+        and welcome to 
+        <strong-text message="this example"></strong-text>
+    </div>
+
+    <script>
+        const StrongText = Vue.defineComponent({
+            template: '<strong>{{ message }}</strong>',
+            props: { message: String }
+        });
+
+        Vue.createApp({
+            components: { StrongText }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

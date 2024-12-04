@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue component communication example</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        You click the button: {{ count }} times.<br>
+        <strong-button-with-random v-on:clicked-event="handleClick"></strong-button-with-random>
+    </div>
+
+    <script>
+        const StrongButtonWithRandom = Vue.defineComponent({
+            template: `
+            <button v-on:click="clicked">
+                <strong>Click me!</strong>
+            </button>`,
+            methods: {
+                clicked() {
+                    this.$emit('clicked-event', Math.random());
+                }
+            },
+        });
+
+        Vue.createApp({
+            data() { return { count: 0 } },
+            components: { StrongButtonWithRandom },
+            methods: {
+                handleClick(randomNumber) {
+                    this.count = randomNumber;
+                }
+            },
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
