@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .nav-item {
+            cursor: pointer;
+        }
+
+        .homeContainer {
+            margin-bottom: 200px;
+        }
+
+        .last {
+            margin: 50px;
+            border-radius: 30px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .last>* {
+            width: 100%;
+            height: 500px;
+        }
+
+        .coverImage {
+            filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: -500px;
+        }
+
+        .coverImage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pattern {
+            position: relative;
+            background-image: url("https://pngimg.com/uploads/dot/dot_PNG4.png");
+            background-repeat: repeat;
+            background-size: 5px;
+            opacity: 0.5;
+            margin-bottom: -500px;
+        }
+
+        .coverText {
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        .coverText div {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            margin: auto;
+            padding: 20px 40px;
+            text-align: center;
+        }
+
+        .filmCard {
+            width: 30%;
+            box-sizing: border-box;
+            height: 200px;
+            display: inline-flex;
+            flex-direction: row;
+            border: 1px solid gray;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+
+        .filmCard h1 {
+            font-size: 22px;
+        }
+
+        .filmCardImg {
+            height: 100%;
+        }
+
+        .filmCardImg img {
+            height: 100%;
+            width: auto;
+        }
+
+        .filmCardTxt {
+            padding: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light navbar-expand-lg">
+        <div class="container container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            Home (Count: 0)
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            Movies (Count: 0)
+                        </a>
+                    </li>
+                </ul>
+                <div>Total click: 0</div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="homeContainer">
+        <div class="last">
+            <div class="coverImage"><img src="http://localhost:3000/not-found-movie.webp" class="card-img" alt="" />
+            </div>
+            <div class="pattern"></div>
+            <div class="coverText">
+                <div>
+                    <h1>Movie title</h1>
+                    <p>Movie Plot</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid d-flex justify-content-center gap-5">
+
+        <!-- filmId: 5692a15524de1e0ce2dfcfa3 -->
+        <div class="filmCard">
+            <div class="filmCardImg">
+                <img alt="" src="http://localhost:3000/not-found-movie.webp" />
+            </div>
+            <div class="filmCardTxt">
+                <h1>Movie title</h1>
+                <p>Movie plot</p>
+            </div>
+        </div>
+
+        <!-- filmId: 5692a56f24de1e0ce2dfdd0b -->
+        <div class="filmCard">
+            <div class="filmCardImg">
+                <img alt="" src="http://localhost:3000/not-found-movie.webp" />
+            </div>
+            <div class="filmCardTxt">
+                <h1>Movie title</h1>
+                <p>Movie plot</p>
+            </div>
+        </div>
+
+        <!-- filmId: 5692a57524de1e0ce2dfdd14 -->
+        <div class="filmCard">
+            <div class="filmCardImg">
+                <img alt="" src="http://localhost:3000/not-found-movie.webp" />
+            </div>
+            <div class="filmCardTxt">
+                <h1>Movie title</h1>
+                <p>Movie plot</p>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="http://localhost:3000/not-found-movie.webp" class="card-img" alt="" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Movie title</h5>
+                                <p class="card-text">10/10</p>
+                                <p class="card-text">Movie Plot</p>
+                                <p class="card-text">Release date: 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const NOT_FOUND_IMAGE = "http://localhost:3000/not-found-movie.webp"
+
+        const listMovies = async () => {
+            try {
+                const data = (await axios.get("http://localhost:3000/movies")).data
+                data.forEach((movie) => {
+                    if (movie.poster != null) {
+                        movie.poster = movie.poster.replace("http://ia.media-imdb.com/", "https://m.media-amazon.com/")
+                    } else {
+                        movie.poster = NOT_FOUND_IMAGE
+                    }
+                })
+                movies.value = data
+            } catch (e) {
+                console.error(e)
+            }
+        }
+
+        const getBestMovie = async () => {
+            try {
+                const data = (await axios.get("http://localhost:3000/movies/best")).data
+                if (data.poster != null && data.poster !== "") {
+                    data.poster = data.poster.replace("http://ia.media-imdb.com/", "https://m.media-amazon.com/")
+                } else {
+                    data.poster = NOT_FOUND_IMAGE
+                }
+                movie.value = data
+            } catch (e) {
+                console.error(e)
+            }
+        }
+
+        const getMovie = async (id) => {
+            try {
+                const data = (await axios.get("http://localhost:3000/movies/" + id)).data
+                if (data.poster != null && data.poster !== "") {
+                    data.poster = data.poster.replace("http://ia.media-imdb.com/", "https://m.media-amazon.com/")
+                } else {
+                    data.poster = NOT_FOUND_IMAGE
+                }
+                movie.value = data
+            } catch (e) {
+                console.error(e)
+            }
+        }
+    </script>
+</body>
+
+</html>
