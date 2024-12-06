@@ -8,8 +8,8 @@ import AccessibleCompositionApiTable from './accessible-composition-api/Table.vu
 
 <template>
   <MinimalOptionApiTable/>
-  <MinimalCompositionApiTable/>
+  <MinimalCompositionApiTable/> 
   <AccessibleOptionsApiTable />
   <AccessibleCompositionApiTable/>
-  
+
 </template>
