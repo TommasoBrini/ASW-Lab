@@ -15,7 +15,7 @@ const loadData = (loadedData) => {
     <table>
     <thead>
       <tr>
-        <th>Data</th>
+          <th>Date</th>
           <th>Season</th>
           <th>EpisodeTitle</th>
           <th>About</th>

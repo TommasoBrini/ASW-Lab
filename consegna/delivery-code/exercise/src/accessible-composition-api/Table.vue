@@ -6,28 +6,34 @@ const data = ref([]);
 const loadData = (loadedData) => {
     data.value = loadedData;
 }
+const handleCellClick = (event) => {
+  event.target.focus();
+}
 </script>
 
 <template>
     <DataLoader @data-loaded="loadData" />
     <h1>Accessible Composition API Table</h1>
     <table>
+      <caption>List of episodes of The Office, including date, season, title, description and ratings</caption>
     <thead>
       <tr>
-        <th>Data</th>
-          <th>Season</th>
-          <th>EpisodeTitle</th>
-          <th>About</th>
-          <th>Ratings</th>
+          <th scope="col"></th>
+          <th scope="col">Date</th>
+          <th scope="col">Season</th>
+          <th scope="col">EpisodeTitle</th>
+          <th scope="col">About</th>
+          <th scope="col">Ratings</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="episode in data" :key="episode.Index">
-            <td>{{ episode.Date }}</td>
-            <td>{{ episode.Season }}</td>
-            <td>{{ episode.EpisodeTitle }}</td>
-            <td>{{ episode.About }}</td>
-            <td>{{ episode.Ratings }}</td>
+          <th scope="row" @click="handleCellClick"> {{ episode.Index }}</th>
+          <td tabindex="0" @click="handleCellClick" >{{ episode.Date }}</td>
+          <td tabindex="1" @click="handleCellClick">{{ episode.Season }}</td>
+          <td tabindex="2" @click="handleCellClick">{{ episode.EpisodeTitle }}</td>
+          <td tabindex="3" @click="handleCellClick">{{ episode.About }}</td>
+          <td tabindex="4" @click="handleCellClick">{{ episode.Ratings }}</td>
       </tr>
     </tbody>
   </table>

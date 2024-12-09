@@ -31,7 +31,8 @@ export default {
       <caption>List of episodes of The Office, including date, season, title, description and ratings</caption>
       <thead>
         <tr>
-            <th scope="col">Data</th>
+            <th scope="col"></th>
+            <th scope="col">Date</th>
             <th scope="col">Season</th>
             <th scope="col">EpisodeTitle</th>
             <th scope="col">About</th>
@@ -40,11 +41,12 @@ export default {
       </thead>
       <tbody>
         <tr v-for="episode in data" :key="episode.Index">
+            <th scope="row" @click="handleCellClick"> {{ episode.Index }}</th>
             <td tabindex="0" @click="handleCellClick" >{{ episode.Date }}</td>
-            <td tabindex="0" @click="handleCellClick">{{ episode.Season }}</td>
-            <td tabindex="0" @click="handleCellClick">{{ episode.EpisodeTitle }}</td>
-            <td tabindex="0" @click="handleCellClick">{{ episode.About }}</td>
-            <td tabindex="0" @click="handleCellClick">{{ episode.Ratings }}</td>
+            <td tabindex="1" @click="handleCellClick">{{ episode.Season }}</td>
+            <td tabindex="2" @click="handleCellClick">{{ episode.EpisodeTitle }}</td>
+            <td tabindex="3" @click="handleCellClick">{{ episode.About }}</td>
+            <td tabindex="4" @click="handleCellClick">{{ episode.Ratings }}</td>
         </tr>
       </tbody>
     </table>
